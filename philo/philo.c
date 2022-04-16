@@ -6,7 +6,7 @@
 /*   By: ael-bach <ael-bach@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 02:41:25 by ael-bach          #+#    #+#             */
-/*   Updated: 2022/04/15 22:45:49 by ael-bach         ###   ########.fr       */
+/*   Updated: 2022/04/16 22:46:09 by ael-bach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ void	*rotine(void *arg)
 		ft_print(philos, "has taken a fork");
 		philos->last_meal_time = time_now();
 		ft_print(philos, "is  eating");
-		ft_usleep(philos->shared_data->t_to_eat * 1000);
+		ft_usleep(philos->shared_data->t_to_eat);
 		pthread_mutex_unlock(philos->fork);
 		pthread_mutex_unlock(philos->next_fork);
 		ft_print(philos, "is  sleeping");
-		ft_usleep(philos->shared_data->t_to_sleep * 1000);
+		ft_usleep(philos->shared_data->t_to_sleep);
 		ft_print(philos, "is  thinking");
 		philos->number_of_meals += 1;
 	}
@@ -107,13 +107,13 @@ int	main(int c, char **v)
 	if (c == 5 || c == 6)
 	{
 		vr = init_shared(c, v);
-		if (vr == NULL)
-			return (1);
+		if (vr == NULL || vr->nbr_philo == 0
+			|| vr->nbr_of_times_each_philo_eat == 0)
+			return (0);
 		philos = init_philos(vr);
 		vr->start = time_now();
 		creat_threads(philos, vr);
 		supervisore(philos, vr);
-		system("leaks philo");
 	}
 	else
 		printf("Error\n");

@@ -6,7 +6,7 @@
 /*   By: ael-bach <ael-bach@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 23:54:55 by ael-bach          #+#    #+#             */
-/*   Updated: 2022/04/15 23:45:17 by ael-bach         ###   ########.fr       */
+/*   Updated: 2022/04/16 22:51:30 by ael-bach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*philos_checker(void *arg)
 	{
 		if (check_meals(philos))
 			exit (1);
-		if (time_now() - philos->last_meal_time > philos->shared_data->t_to_die)
+		if (time_now() - philos->last_meal_time >= philos->shared_data->t_to_die)
 		{
 			sem_wait(philos->shared_data->print);
 			printf("%ld : %d is died\n",
@@ -57,13 +57,14 @@ int	main(int ac, char **av)
 {
 	t_philo			**philos;
 	t_shared_data	*vr;
-	pid_t			*id;
 
 	if (ac == 5 || ac == 6)
 	{
 		vr = init_data(ac, av);
+		if (vr->nbr_of_times_each_philo_eat == 0)
+			exit (0);
 		philos = init_philos(vr);
-		id = creat_newprocess(philos, vr, ac);
+		creat_newprocess(philos, vr, ac);
 	}
 	else
 		printf("Error\n");

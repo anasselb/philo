@@ -6,7 +6,7 @@
 /*   By: ael-bach <ael-bach@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 22:56:45 by ael-bach          #+#    #+#             */
-/*   Updated: 2022/04/15 23:46:09 by ael-bach         ###   ########.fr       */
+/*   Updated: 2022/04/16 22:46:58 by ael-bach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ void	ft_print(t_philo *philos, char *str)
 
 void	ft_usleep(long long time)
 {
-	usleep(time * 99 / 100);
+	long long	start;
+
+	start = time_now();
+	while (time_now() - start < time)
+		usleep(100);
 }
 
 long int	time_now(void)

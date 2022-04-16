@@ -6,7 +6,7 @@
 /*   By: ael-bach <ael-bach@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 04:21:17 by ael-bach          #+#    #+#             */
-/*   Updated: 2022/04/15 23:09:53 by ael-bach         ###   ########.fr       */
+/*   Updated: 2022/04/16 21:41:24 by ael-bach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <semaphore.h>
 # include <sys/time.h>
+# include <limits.h>
 
 typedef struct s_shared_data
 {
@@ -48,7 +49,7 @@ long			ft_atoi(const char *str);
 long int		time_now(void);
 void			ft_usleep(long long time);
 void			ft_print(t_philo *philos, char *str);
-int				*creat_newprocess(t_philo **philos, t_shared_data *vr, int ac);
+void			creat_newprocess(t_philo **philos, t_shared_data *vr, int ac);
 void			waiting_process(pid_t *id, int ac, t_shared_data *vr);
 void			*ft_rotine(void *arg);
 void			rotine(t_philo *philos);
