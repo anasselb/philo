@@ -6,7 +6,7 @@
 /*   By: ael-bach <ael-bach@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 23:54:55 by ael-bach          #+#    #+#             */
-/*   Updated: 2022/04/16 22:51:30 by ael-bach         ###   ########.fr       */
+/*   Updated: 2022/04/16 23:00:40 by ael-bach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	*philos_checker(void *arg)
 	{
 		if (check_meals(philos))
 			exit (1);
-		if (time_now() - philos->last_meal_time >= philos->shared_data->t_to_die)
+		if (time_now() - philos->last_meal_time
+			>= philos->shared_data->t_to_die)
 		{
 			sem_wait(philos->shared_data->print);
 			printf("%ld : %d is died\n",
